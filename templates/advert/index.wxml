@@ -1,0 +1,10 @@
+<template name="advert">
+  <scroll-view class="showcase-container" scroll-x="true">
+    <view class="showcase">
+      <navigator wx:for="{{advertList}}" wx:key="id" class="showcase__item" hover-class="ui--active">
+        <image class="showcase__item-image--booklist" src="http://192.168.1.99/upload{{item.picUrl || '/images/icon_empty_booklist.png'}}" mode="aspectFill" />
+        <view class="font-black-30 ellipsis-l2">{{item.title}}</view>
+      </navigator>
+    </view>
+  </scroll-view>
+</template>
