@@ -58,7 +58,7 @@ export function throttle (func, wait, options) {
  * @param {boolean} options.accumulate 保留现在接收到的所有参数并以数组的方式传递给传入函数
  * @return {function} 返回客户调用函数
  */
-export function debounce (fn, wait = 0, options = {}) {
+function debounce (fn, wait = 0, options = {}) {
   let lastCallAt
   let deferred
   let timer
@@ -149,7 +149,7 @@ export function formatDate (date, glue = '-') {
  * var now = new Date();
  * var newDate = DateAdd( "d", 5, now);
  */
-export function dateAdd (interval, number, date) {
+function dateAdd (interval, number, date) {
   switch (interval) {
     case 'y': {
       date.setFullYear(date.getFullYear() + number)
@@ -184,4 +184,26 @@ export function dateAdd (interval, number, date) {
       return date
     }
   }
+}
+// 时间格式化
+function formatTime(date) {
+  var year = date.getFullYear()
+  var month = date.getMonth() + 1
+  var day = date.getDate()
+  var hour = date.getHours()
+  var minute = date.getMinutes()
+  var second = date.getSeconds();
+  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+}
+//格式化数字
+function formatNumber(n) {
+  n = n.toString()
+  return n[1] ? n : '0' + n
+}
+
+module.exports = {
+  debounce: debounce,
+  formatDate: formatDate,
+  dateAdd: dateAdd,
+  formatTime: formatTime
 }

@@ -38,9 +38,10 @@ Page({
   },
 
   _updateUserInfo: function (userInfo) {
-    return updateUserInfoById(getUID(), {
-      nickname: userInfo.userInfo.nickName,
-      avatar: userInfo.userInfo.avatarUrl
-    }).then(res => app.setUserInfo(res))
+    //这里会更新用户昵称和头像信息
+    // return updateUserInfoById(getUID(), {
+      // nickname: userInfo.userInfo.nickName,
+      // avatar: userInfo.userInfo.avatarUrl
+    // }).then(res => app.setUserInfo(res))
   }
 })

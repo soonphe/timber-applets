@@ -67,6 +67,10 @@
 
 ![系统技术栈](docs/static/architecture/system_technology_stack.png "系统技术栈")
 
+### 项目展示（Project Show）
+
+![Copyright](docs/static/project/timber_applets_copyright.png "Copyright")
+
 ### 项目结构（Project Structure）
 
 ```
@@ -142,11 +146,63 @@ timber-applets
 #### 3.工具库（Tools Library）
 
 ### 工作进度（Work Progress）
+- 网络请求，含参(已完成)
+- List界面渲染（已完成）
+- 真机渲染（已完成）
+- 商城（已完成）
+- 消息(暂缓)
+- 我的（已完成）
+- 注册页（注册成功，保存token和userInfo，uid=id）
+- 登录页（注册即登录）
+- 关于我们（灰色字体：999999，蓝色字体：576b95）
+- Wx.login，调用接口获取登录凭证（code），通过凭证进而换取用户登录态信息，包括用户在当前小程序的唯一标识（openid）、微信开放平台账号下的唯一标识（unionid，若当前小程序已绑定到微信开放平台账号）及本次登录的会话密钥（session_key）等。用户数据的加解密通讯需要依赖会话密钥完成
+* wx.getUserInfo，获取用户信息
+    * res.userInfo为不包含openId等敏感信息
+    * userInfo	UserInfo	用户信息对象，不包含 openid 等敏感信息	
+    * rawData	string	不包括敏感信息的原始数据字符串，用于计算签名	
+    * signature	string	使用 sha1( rawData + sessionkey ) 得到字符串，用于校验用户信息，详见 用户数据的签名验证和加解密	
+    * encryptedData	string	包括敏感数据在内的完整用户信息的加密数据，详见 用户数据的签名验证和加解密	
+    * iv	string	加密算法的初始向量，详见 用户数据的签名验证和加解密	
+    * cloudID	string	敏感数据对应的云 ID，开通云开发的小程序才会返回，可通过云调用直接获取开放数据，详细见云调用直接获取开放数据
+* wx.authorize(Object object) 微信授权
+* wx.authorizeForMiniProgram(Object object)，仅小程序插件中能调用该接口，用法同 wx.authorize
+* wx.getSetting  // 查看是否授权，获取用户的当前设置。返回值中只会出现小程序已经向用户请求过的权限。
+* 手机号快速验证组件
+* 手机号实时验证组件
+- 轮播图swiper（已完成）——调整为静态文件+url共存
+- cardView（已完成）
+- 本地存储：get/setStorageSync（已完成）
+- we.for警告解决(不添加wx:id会自动警告，如不提供 wx:key，会报一个 warning， 如果明确知道该列表是静态，或者不必关注其顺序，可以选择忽略)
+- 报错解决（export function变为module.exports中包含）
 
-1. ## 公众号
+## 在哪里可以免费看我的文章
 
-`0-1Learning`项目全套学习教程连载中，关注公众号「**罗晓胜**」第一时间获取。
+### github
+>  [0-1Learning](https://github.com/soonphe/0-1Learning "")
+> 
 
-加微信群交流，公众号后台回复「**加群**」即可。
+ ### 公众号
+
+公众号已发布 `0-1Learning` 部分文章，另有更多好文，等待你的探索，关注公众号「**罗晓胜**」第一时间获取。
 
 ![公众号图片](docs/static/common/luoxiaosheng_wechat_common.jpg)
+
+### 在哪里可以免费看我的视频
+
+文字终究表达有限，视频效果会比文字好很多。
+
+**视频内容想到哪就拍到哪了，什么好玩就拍什么了，也不想给自己规定个什么内容了，以后的事，谁说得准呢！**
+
+尽量会在全平台投稿，Youtube、tiktok、B站等，关注「**罗晓胜**」第一时间获取。
+
+如有任何疑问给我留言吧，能力范围内都会回复！记得互动支持喔！
+
+> `注意，作者不会主动联系任何人`，**任何冒充作者主动联系你都是骗子！！！**
+> 
+> `注意，涉及金钱交易的，请核实再核实后操作，以免上当受骗`
+>
+> `注意，免责申明 1、本软件产品为免费软件仅供学习交流使用，用户可以非商业性地下载、安装、复制和散发本软件产品。 2、本软件不得用于从事任何违反国家法律的事情，使用者所做任何事情也与作者无关，对于用户擅自使用本软件从事违法活动不承担任何责任`
+
+## 许可证
+
+Copyright (c) 2018 soonphe

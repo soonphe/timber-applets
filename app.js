@@ -23,6 +23,11 @@ App({
 
     // 初始化帮助信息
     initTipSettings()
+
+    //每次启动记录启动时间
+    var logs = wx.getStorageSync('logs') || []
+    logs.unshift(Date.now())
+    wx.setStorageSync('logs', logs)
   },
 
   /**

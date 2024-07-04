@@ -17,11 +17,11 @@ Page({
   },
 
   onLoad: function (options) {
-    wx.showModal({
-      title: '说明',
-      content: "本项目是一个开源项目，数据均为随机生成，仅供演示使用。",
-      showCancel: false
-    })
+    // wx.showModal({
+    //   title: '说明',
+    //   content: "本项目是一个开源项目，数据均为随机生成，仅供演示使用。",
+    //   showCancel: false
+    // })
     needReturn = options.need_return
   },
 
@@ -54,33 +54,49 @@ Page({
 
   onSubmit: function () {
     let { phone, vrcode } = this.data
-    if (!isPhone(phone)) {
-      toptip.show('手机号格式不正确')
-      return
-    }
-    if (!isVrcode(vrcode)) {
-      toptip.show('请输入6位数字验证码')
-      return
-    }
+    // 跳过格式校验
+    // if (!isPhone(phone)) {
+    //   toptip.show('手机号格式不正确')
+    //   return
+    // }
+    // if (!isVrcode(vrcode)) {
+    //   toptip.show('请输入6位数字验证码')
+    //   return
+    // }
     wx.showToast({
       title: '加载中',
       icon: 'loading'
     })
-    checkCode(phone, vrcode).then(res => {
-      if (!login(res.data.token, res.data.user)) {
-        return Promise.reject(new Error('设置登录态失败'))
-      }
+    // 跳过api校验
+    wx.redirectTo({ url: './children/result' })
+    // checkCode(phone, vrcode).then(res => {
+    //   if (!login(res.data.token, res.data.user)) {
+    //     return Promise.reject(new Error('设置登录态失败'))
+    //   }
 
-      // 201：创建了新的用户 200：登录成功
-      if (res.statusCode === 201) {
-        wx.redirectTo({ url: './children/result' })
-      } else if (needReturn) {
-        wx.navigateBack()
-      } else {
-        wx.switchTab({ url: '/pages/home/home' })
+    //   // 201：创建了新的用户 200：登录成功
+    //   if (res.statusCode === 201) {
+    //     wx.redirectTo({ url: './children/result' })
+    //   } else if (needReturn) {
+    //     wx.navigateBack()
+    //   } else {
+    //     wx.switchTab({ url: '/pages/home/home' })
+    //   }
+    // }).finally(() => {
+    //   wx.hideToast()
+    // })
+    // 调用微信获取登录凭证
+    wx.login({
+      success: function (res) {
+        console.log('微信授权成功'+'code值:'+res.code)
+        wx.getUserInfo({
+          success: function (res) {
+            console.log('微信授权成功'+'code值:'+res.code+',nickName:'+res.userInfo.nickName)
+            // that.globalData.userInfo = res.userInfo;
+            // typeof cb == "function" && cb(that.globalData.userInfo)
+          }
+        })
       }
-    }).finally(() => {
-      wx.hideToast()
-    })
+    });
   }
 })

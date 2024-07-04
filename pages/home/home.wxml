@@ -1,10 +1,42 @@
 <import src="/templates/showcase/index" />
 <import src="/templates/advert/index" />
 <import src="/templates/page-status-indicator/index" />
-<!-- 搜索栏 -->
+<!-- searchBar -->
 <home-search-bar id="searchBar" bindfocus="onFocus" bindcancel="onCancel" bindsearch="onSearch"></home-search-bar>
-
+<!-- page-status -->
 <template data="{{pageStatus}}" is="page-status-indicator"></template>
+<!-- main_container -->
+<view class="container">
+  <!-- banner -->
+  <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for-items="{{banner_list[0].banner}}">
+      <swiper-item>
+        <image src="{{item.pic_url}}" class="slide-image" />
+      </swiper-item>
+    </block>
+  </swiper>
+  <!-- menu -->
+  <view class='menueview'>
+    <block wx:for-items="{{banner_list[1].banner}}">
+      <image src="{{item.pic_url}}" class="menue-image" bindtap="bindViewTap"/>
+    </block>
+  </view>
+  <!-- 分割线 -->
+  <view class='separator'></view>
+  <view class='floortitle'>
+    <view class='floortitlemoreicon'>热卖商品</view>
+    <view class='floortitlemoretext'>更多> </view>
+  </view>
+  <!-- cardview -->
+  <view class='hotgoodcontainer'>
+    <view class='gooditem' wx:for="{{hotgoods}}" wx:for-index="idx" wx:for-item="good">
+      <view class='imgview'>
+        <image class='productimg' src='{{good.pic_url}}' />
+      </view>
+      <view>{{good.name}}</view>
+    </view>
+  </view>
+</view>
 <!-- 主页 -->
 <view wx:if="{{pageStatus == 'done' && !search.focus}}" class="panel-area">
   <panel title="阅读统计" url="/pages/profile/children/order-history">
